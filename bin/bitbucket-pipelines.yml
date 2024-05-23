@@ -1,0 +1,88 @@
+image: atlassian/default-image:2
+
+
+pipelines:
+  pull-requests:
+    release/prod:
+      - parallel:
+        - step:
+            name: Build and Test
+            script:
+              - ./mvnw verify --file pom.xml
+            caches:
+              - maven
+            after-script:
+              - pipe: atlassian/checkstyle-report:0.2.0
+                variables:
+                  DEBUG: "true"
+        - step:
+            name: Security Scan
+            script:
+              # Run a security scan for sensitive data.
+              # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+              - pipe: atlassian/git-secrets-scan:0.4.3
+    release/dev:
+      - parallel:
+        - step:
+            name: Build and Test
+            script:
+              - ./mvnw verify --file pom.xml
+            caches:
+              - maven
+            after-script:
+              - pipe: atlassian/checkstyle-report:0.2.0
+                variables:
+                  DEBUG: "true"
+        - step:
+            name: Security Scan
+            script:
+              # Run a security scan for sensitive data.
+              # See more security tools at https://bitbucket.org/product/features/pipelines/integrations?&category=security
+              - pipe: atlassian/git-secrets-scan:0.4.3
+
+
+  branches:
+    release/prod:
+      - step:
+          name: Build
+          script:
+            - mvn clean install -DskipTests
+            - cp target/Taizo.war Taizo.war
+          artifacts:
+            - Taizo.war
+      - step:
+          name: Deploy Taizo-Java to Production EBS
+          deployment: Production
+          script:
+            - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+              variables:
+                AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                APPLICATION_NAME: 'Taizo'
+                ENVIRONMENT_NAME: 'Taizo-env'
+                S3_BUCKET: 'taizo-artifact'
+                ZIP_FILE: 'Taizo.war'
+                VERSION_LABEL: 'prod-0.1.$BITBUCKET_BUILD_NUMBER'
+    release/dev:
+        - step:
+           name: Build
+           script:
+              - mvn clean install -DskipTests
+              - cp target/Taizo.war Taizo.war
+           artifacts:
+              - Taizo.war
+        - step:
+            name: Deploy Taizo-Java to Development EBS
+            deployment: Development
+            script:
+              - pipe: atlassian/aws-elasticbeanstalk-deploy:0.6.6
+                variables:
+                  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+                  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+                  AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                  APPLICATION_NAME: 'Taizo Dev'
+                  ENVIRONMENT_NAME: 'TaizoDev-env'
+                  S3_BUCKET: 'taizo-artifact'
+                  ZIP_FILE: 'Taizo.war'
+                  VERSION_LABEL: 'dev-0.1.$BITBUCKET_BUILD_NUMBER'
