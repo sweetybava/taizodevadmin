@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">    
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <script type="text/javascript" src="/js/DownloadCV.js"></script>
+    
+    <title>proForma invoice</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<style>
+
+    @media print {
+        .bgGrn {
+            background-color: #1CB260 !important;
+            -webkit-print-color-adjust: exact;
+        }
+        .finalPrice {
+            background-color: #88cfa8 !important;
+            -webkit-print-color-adjust: exact;
+        }
+    }
+    
+    body{
+    font-family: 'DM Sans', sans-serif;
+    }
+    .bgGrn {
+        background-color: #1CB260;
+        height: 30px;
+        padding: 0px;
+    }
+    
+    .txtGrn {
+        color: #1CB260;
+    }
+    
+    .divMargin {
+ 
+    }
+    
+    .txtSize {
+        font-size: 15px;
+        font-weight: 600;
+    }
+    
+    .txtInvoice {
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .finalPrice {
+        display: flex;
+        justify-content: end;
+        align-content: center;
+        background-color: #88cfa8;
+        height: 35px;
+        padding-right: 10px;
+        color: black;        
+    }
+    
+    .finalPrice>p{
+    width:auto
+    }
+    
+  
+    
+    
+    
+ 
+    
+ 
+    
+ 
+</style>
+
+<body>
+    <div id="makepdf">
+        <div class="bgGrn">
+
+        </div>
+        <div class="divMargin">
+
+            <div class="row">
+                <!-- left-column -->
+
+                <div class="col-6">
+                    
+
+                        <img src="https://taizo-common.s3.ap-south-1.amazonaws.com/Email+Notifications+-+Images_Assets/Taizo_logo.png" style="width: 18s0px; margin-top:20px; margin-left:10px; height: 50px;" class="img-fluid">
+                        <hr/>
+
+                    
+                    
+                   
+                    
+                </div>
+                <!-- right column -->
+                <div class="col-6" >
+                <div class="d-grid justify-content-end" style="margin-left: 100px;">
+                <h1 class="txtGrn  txtInvoice" style=" margin-top: 20px; font-family: 'DM Sans', sans-serif; font-weight: 700;font-size: 35px">PROFORMA INVOICE </h1>
+                    <div style="">
+                        <p> <span class="txtSize">DATE : &nbsp;</span> <span class="date ">   ${InvoiceDate} </span><br />
+
+                        </P>
+                    </div></div>
+                    
+                   
+                </div>
+            </div>
+            <div>
+             <h6>
+                        Corporate identity # - <span class="corporateId">U74999TN2018PTC123524</span ><br /> GST IN # - <span class="gstIn">33AAGCT8375E1Z6</span><br /> PAN # - <span class="pan">AAGCT8375E</span>
+                    </h6>
+                    
+            </div>
+             <br />
+            <div class="row">
+            <div class="col-6">
+            <h5 class="txtInvoice companyName" style="font-weight: 600; font-size: 20px">${CompanyName}</h5>
+
+             
+                    <p class="address">
+                        ${Address}</p>
+                       
+                        <br /> 
+                        
+                        <#if gstNumber??>
+                        <span class="txtSize">GST : &nbsp;</span>
+                           <span class="GSTsNumber">${gstNumber}</span>
+                        </#if>
+           
+                     
+
+
+             </div>
+            <div class="col-6"> 
+                <div class="" style="margin-left: 10px; padding-top:0px">
+                        <p> <span class="txtSize">PHONE : &nbsp;</span> <span class="phNo ">   +91 ${MobileNum}</span><br />
+<#if Email??>
+<span class="txtSize">EMAIL : &nbsp;</span>
+    <span class="email">${Email}</span>
+
+</#if>
+ 
+
+                        </P>
+                    </div>
+            </div>
+            </div>
+            <br />
+            <!-- end of first row -->
+            <!-- description -->
+
+            <div class="row bgGrn text-center text-white d-flex align-items-center" style="font-weight: 500; ">
+                <div class="col-3"> DESCRIPTION</div>
+                <div class="col-3">TAXABLE VALUE </div>
+                <div class="col-2">SGST @ 9%</div>
+                 <div class="col-2">CGST @ 9%</div>
+                <div class="col-2">TOTAL</div>
+            </div>
+
+
+            <div class="row text-center pt-2 " style="font-weight: 500;">
+                <div class="col-3 decription"> Premium Plan </div>
+                <div class="col-3 taxable-value"> ${Tax}</div>
+                <div class="col-2 SGST-value">${GST}</div>
+                 <div class="col-2 CGST-value">${GST}</div>
+                <div class="col-2 total-value">${TotalAmount}</div>
+            </div><br /><br /><br />
+            <!-- description -->
+            <!-- <div class="total finalPrice row "> <p><span style="font-weight: 400;"></span>Grand Total &nbsp; &nbsp; <span class="grandTotal" style="font-weight: 700;">INR ${TotalAmount}</span></p></div> -->
+            <div style="padding-top: 5px;" class="total finalPrice  " ><p style="font-weight: 400; ">Grand Total &nbsp; &nbsp;</p> <p class="grandTotal" style="font-weight: 700;">INR ${TotalAmount} </p></div>
+            <hr><br />
+           
+            <!-- footer section -->
+            <div class="" style="margin-top: 70px !important">
+                <div class="row">
+                    <div class="col-6">
+                        <p style="font-weight: 500;">
+                            Questions ? <br /> Email Us at <a mailto:href="#">info@taizo.in</a><br /> or Call Us at +91 7806805808
+                        </p>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <h1 class="txtGrn  txtInvoice" style=" margin-left: 10vw; margin-top: 3vh;  font-weight: 700;font-size: 35px">THANK <br /> &nbsp; &nbsp; YOU!</h1>
+
+                    </div>
+                </div>
+                <hr>
+                <div class="text-center mb-2" style="font-weight: 500;">
+                    A-2 Happy Homes , New no 9 , Old no -4, 4th Main Rd, United India Colony, Kodambakkam, Chennai, Tamil Nadu 600024
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="bgGrn">
+
+
+        </div>
+
+    </div>
+
+
+
+</body>

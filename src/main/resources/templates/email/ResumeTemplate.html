@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+
+    <!-- <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
+    <!-- html2pdf CDN-->
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> -->
+    <style>
+        @media print {
+            .bgGrn {
+                background-color: #1CB260 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            ul.timeline:before {
+                background: black;
+                -webkit-print-color-adjust: exact;
+            }
+            ul.timeline>li:before {
+                content: ' ';
+                background: white;
+                border: 3px solid #1CB260;
+                background-color: #1CB260;
+                -webkit-print-color-adjust: exact;
+            }
+            .detailsLeft {
+                background-color: #1CB260 !important;
+                -webkit-print-color-adjust: exact;
+            }
+            .contentWrp {
+                max-height: 297mm !important;
+                background-color: aqua;
+            }
+        }
+        
+        ul {
+            list-style-type: none;
+            position: relative;
+        }
+        
+        .listContainer {
+            margin-left: 50px;
+            border-left: 6px solid black;
+            min-height: 260mm !important;
+            margin-top: 0px;
+        }
+        
+        .listContainer ul {
+            /* margin-top: -100px !important; */
+            position: relative;
+            top: -25px
+        }
+        
+        ul {
+            /* margin-left: 50px;
+            border-left: 6px solid black;
+            min-height: 250mm !important; */
+            margin-top: 0px;
+            padding-top: 20px;
+        }
+        
+        p {
+            word-wrap: break-word !important;
+        }
+        
+        ul li {
+            margin: 0px 0;
+            padding-left: 5px;
+        }
+        
+        ul .points {
+            height: 25px;
+            width: 25px;
+            background-color: #1CB260;
+            border-radius: 50%;
+            display: inline-block;
+            margin-top: 0px;
+            margin-left: -63px
+        }
+        
+        .detailsLeft {
+            background-color: #1CB260 !important;
+            padding: 9vh 1vh 5vw 1vw;
+            min-width: 290px;
+            width: 290px;
+            max-width: 290px;
+            height: 100%;
+            display: grid;
+            justify-content: center;
+        }
+        
+        .bodyContent {
+            margin: 5vh 0vw;
+        }
+        
+        .iconify {
+            font-size: 25px;
+        }
+        
+        .emailId {
+            word-break: break-word;
+            display: inline !important;
+        }
+        
+        .leftRow {
+            max-height: 250mm !important;
+            min-height: 250mm !important;
+        }
+        
+        .headtxt {
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .detailsRight .headtxt {
+            font-size: 28px;
+            font-weight: 600;
+            margin-left: -20px;
+        }
+        
+        .subtxt {
+            font-size: 22px;
+            font-weight: 550;
+            word-wrap: break-word;
+        }
+        
+        .grid {
+            display: grid;
+            min-height: 270mm;
+            /* max-height: 297mm; */
+            grid-template-columns: auto;
+            align-content: space-between;
+        }
+        /* .keySkillsContainer p,
+        .educationContainer p,
+        .certificationContainer p,
+        .lanKnownContainer p {
+            margin: 0px;
+        } */
+        /* .keySkillsContainer,
+        .educationContainer,
+        .certificationContainer,
+        .lanKnownContainer {
+            padding: 20px 0px;
+        } */
+        
+        @media print {
+            body {
+                width: 21cm;
+                height: 29.7cm;
+                /* margin: 30mm 45mm 30mm 45mm; */
+                /* change the margins as you want them to be. */
+            }
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .detailsLeft span {
+            font-size: 20px;
+            /* color: aquamarine; */
+        }
+        
+        .Display-none {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contentWrp">
+        <div id="makepdf">
+            <table>
+                <tr>
+                    <td>
+                        <!-- left side -->
+                        <div class=" detailsLeft text-center grid">
+                            <div style="padding-top:70px">
+                                <div style="width: 140px; height: 140px; border-style: solid; border-radius: 15px; background-color: whitesmoke; margin-left:auto; margin-right: auto;"> <img width="140px" style="border-radius: 15px;" src=${photo}></div><br>
+                                <div>
+                                    <h4 class="name headtxt my-3" style="margin-top:-5px;"> ${name} </h4>
+                                    <p style="margin-top:-15px;">
+                                        <span class="">AGE : <span class="age" >${age}, </span><span class="gender"></span> ${gender}</span>
+                                    </p>
+                                    <div style=" word-wrap:break-word; width: 290px;">
+                                        <h4 class="headtxt my-3 Display-${RoleHide}" style="">( ${role})</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="position:absolute; bottom:40px;left:10px">
+                                <p class=" headtxt text-center" style="font-size:25px; font-weight:600;">CONTACT</p>
+                                <div class="mb-5 mt-4" style="margin-bottom:50px;margin-top:-10px;">
+                                    <table style="margin-left:30px; width: 250px;">
+                                        <tr>
+                                            <td>
+                                                <span><img style="width: 20px;" src="https://taizo-common.s3.ap-south-1.amazonaws.com/Temp+Images+Campaign/phone_icon.png" alt=""></span>
+                                            </td>
+                                            <td style="text-align: left;">
+                                                <p style="margin:0px 5px; font-size:20px;" class="mobileNumber">  +91 ${mobNum}</p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span><img style="width: 20px;" src="https://taizo-common.s3.ap-south-1.amazonaws.com/Temp+Images+Campaign/whatsapp_icon.png" alt="">&nbsp;</span>
+                                            </td>
+                                            <td style="text-align: left;">
+                                                <p style="margin:10px 5px;font-size:20px;" class="whatsappNumber"> +91 ${whatsappNum}</p>
+                                            </td>
+                                        </tr>
+                                        <tr class="emailId Display-${EmailHide} ">
+                                            <td>
+                                                <span><img style="width: 20px;" src="https://taizo-common.s3.ap-south-1.amazonaws.com/Temp+Images+Campaign/mail_icon.png" alt="">&nbsp;</span>
+                                            </td>
+                                            <td style="text-align: left;">
+                                                <p style="margin:0px 5px;font-size:20px; word-break: break-all !important; word-wrap:break-word;width:220px;"> <span> ${email}</span></p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <p>
+
+
+
+
+
+                                    </p>
+                                </div>
+                                <div style="padding: 5px;">
+
+                                    <p class=" " style="margin-bottom:-10px; font-size:25px; font-weight:600; ">CURRENT ADDRESS
+                                    </p>
+                                    <p class="contactAdd" style="font-size:20px;">${address} </p>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </td>
+                    <!-- right side -->
+                    <td>
+
+
+                        <div class="">
+
+                            <!------ Include the above in your HEAD tag ---------->
+
+
+                            <div class=" ">
+                                <div class="listContainer">
+
+                                    <ul class="  detailsRight">
+                                        <li>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="points">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <span class="headtxt">PROFILE</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p class="subtxt"> ${profileDescription}</p>
+                                        </li>
+                                        <li>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="points">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <span class="headtxt">KEY SKILLS</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="keySkillsContainer">
+                                                <p class="subtxt">
+                                                    ${key}
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="points">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <span class="headtxt">EXPERIENCE</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+
+                                            <p class="subtxt">${exp} Years, ${months} Months</p>
+
+
+                                        </li>
+                                        <li>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="points">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <span class="headtxt">EDUCATION</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="educationContainer">
+                                                <p class="subtxt">${education} </p>
+                                            </div>
+                                        </li>
+                                        <li class="Display-${CertificationHide}">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="points">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <span class="headtxt">CERTIFICATION</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="certificationContainer">
+                                                <p class="subtxt">${certificates} </p>
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <div class="points">
+                                                        </div>
+
+                                                    </td>
+                                                    <td>
+                                                        <span class="headtxt">LANGUAGES KNOWN</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <div class="lanKnownContainer">
+                                                <p class="subtxt">${languagesKnown}</p>
+
+                                            </div>
+
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </td>
+                </tr>
+            </table>
+            <div class="row bodyContent container-fluid">
+
+                <!-- right side -->
+
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+
+
+</html>
